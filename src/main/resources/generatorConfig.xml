@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--导入属性配置-->
+    <properties url="file:\\\D:\IdeaProjects\endless\src\main\resources\jdbc.properties"/>
+    <!--    使用 resource 报错 <properties> resource jdbc.properties does not exist-->
+    <!--    <properties resource="jdbc.properties"/>-->
+
+    <!--targetRuntime="MyBatis3Simple"表示生成简易版本，这里创建原始版本,参数为MyBatis3-->
+    <!-- context 是逆向工程的主要配置信息 -->
+    <!-- id：名字 -->
+    <!-- targetRuntime：设置生成的文件适用于 mybatis 版本 -->
+    <context id="testTables" targetRuntime="MyBatis3">
+
+        <!-- 为model生成序列化方法-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- 为生成的model创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <!--optional,旨在创建class时，对注释进行控制-->
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释。true：是;false:否   若suppressAllComments=true，则该属性被忽略-->
+            <property name="suppressAllComments" value="true"/>
+            <!--  注释是否包含数据库表的注释信息  true：是 ： false:否 -->
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="${jdbc.driverClassName}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL和NUMERIC类型解析为Integer，为true时把JDBC DECIMAL 和
+            NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- targetProject:POJO类生成的位置 -->
+        <javaModelGenerator targetPackage="${pojo.targetPackage}"
+                            targetProject="./src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀
+             如果true，MBG会根据catalog和schema来生成子包。如果false就会直接用targetPackage属性。默认为false。-->
+            <property name="enableSubPackages" value="true"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="${mapper.targetPackage}"
+                         targetProject="./src/main/resources">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="${mapper.targetPackage}"
+                             targetProject="./src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!-- 指定生成哪些数据库表，要和数据库中对应，不能写错了，这里以t_user表为例，可以写多个；domainObjectName是要生成的实体类名称-->
+        <table schema="mybatis" tableName="el_user"/>
+        <table schema="mybatis" tableName="el_collect"/>
+        <table schema="mybatis" tableName="el_comment"/>
+        <table schema="mybatis" tableName="el_follow"/>
+        <table schema="mybatis" tableName="el_work"/>
+        <table schema="mybatis" tableName="el_work_have_tag"/>
+        <table schema="mybatis" tableName="el_work_tag"/>
+        <table schema="mybatis" tableName="el_zan"/>
+        <table schema="mybatis" tableName="el_browse"/>
+        <!-- 有些表的字段需要指定java类型
+         <table schema="" tableName="">
+            <columnOverride column="" javaType="" />
+        </table> -->
+    </context>
+</generatorConfiguration>

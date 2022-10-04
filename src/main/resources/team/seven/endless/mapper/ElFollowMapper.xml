@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.seven.endless.mapper.ElFollowMapper">
+  <resultMap id="BaseResultMap" type="team.seven.endless.entity.ElFollow">
+    <id column="follow_id" jdbcType="BIGINT" property="followId" />
+    <result column="follow_user_id" jdbcType="BIGINT" property="followUserId" />
+    <result column="followed_user_id" jdbcType="BIGINT" property="followedUserId" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    follow_id, follow_user_id, followed_user_id, is_deleted, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="team.seven.endless.entity.ElFollowExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from el_follow
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from el_follow
+    where follow_id = #{followId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from el_follow
+    where follow_id = #{followId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="team.seven.endless.entity.ElFollowExample">
+    delete from el_follow
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="team.seven.endless.entity.ElFollow">
+    insert into el_follow (follow_id, follow_user_id, followed_user_id, 
+      is_deleted, create_time, update_time
+      )
+    values (#{followId,jdbcType=BIGINT}, #{followUserId,jdbcType=BIGINT}, #{followedUserId,jdbcType=BIGINT}, 
+      #{isDeleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="team.seven.endless.entity.ElFollow">
+    insert into el_follow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="followId != null">
+        follow_id,
+      </if>
+      <if test="followUserId != null">
+        follow_user_id,
+      </if>
+      <if test="followedUserId != null">
+        followed_user_id,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="followId != null">
+        #{followId,jdbcType=BIGINT},
+      </if>
+      <if test="followUserId != null">
+        #{followUserId,jdbcType=BIGINT},
+      </if>
+      <if test="followedUserId != null">
+        #{followedUserId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="team.seven.endless.entity.ElFollowExample" resultType="java.lang.Long">
+    select count(*) from el_follow
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update el_follow
+    <set>
+      <if test="record.followId != null">
+        follow_id = #{record.followId,jdbcType=BIGINT},
+      </if>
+      <if test="record.followUserId != null">
+        follow_user_id = #{record.followUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.followedUserId != null">
+        followed_user_id = #{record.followedUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update el_follow
+    set follow_id = #{record.followId,jdbcType=BIGINT},
+      follow_user_id = #{record.followUserId,jdbcType=BIGINT},
+      followed_user_id = #{record.followedUserId,jdbcType=BIGINT},
+      is_deleted = #{record.isDeleted,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="team.seven.endless.entity.ElFollow">
+    update el_follow
+    <set>
+      <if test="followUserId != null">
+        follow_user_id = #{followUserId,jdbcType=BIGINT},
+      </if>
+      <if test="followedUserId != null">
+        followed_user_id = #{followedUserId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where follow_id = #{followId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.seven.endless.entity.ElFollow">
+    update el_follow
+    set follow_user_id = #{followUserId,jdbcType=BIGINT},
+      followed_user_id = #{followedUserId,jdbcType=BIGINT},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where follow_id = #{followId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.seven.endless.mapper.ElWorkMapper">
+  <resultMap id="BaseResultMap" type="team.seven.endless.entity.ElWork">
+    <id column="work_id" jdbcType="BIGINT" property="workId" />
+    <result column="work_type" jdbcType="TINYINT" property="workType" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="zan_amount" jdbcType="INTEGER" property="zanAmount" />
+    <result column="work_url" jdbcType="VARCHAR" property="workUrl" />
+    <result column="work_title" jdbcType="VARCHAR" property="workTitle" />
+    <result column="work_introduce" jdbcType="VARCHAR" property="workIntroduce" />
+    <result column="work_cover_url" jdbcType="VARCHAR" property="workCoverUrl" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    work_id, work_type, user_id, zan_amount, work_url, work_title, work_introduce, work_cover_url, 
+    is_deleted, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="team.seven.endless.entity.ElWorkExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from el_work
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from el_work
+    where work_id = #{workId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from el_work
+    where work_id = #{workId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="team.seven.endless.entity.ElWorkExample">
+    delete from el_work
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="team.seven.endless.entity.ElWork">
+    insert into el_work (work_id, work_type, user_id, 
+      zan_amount, work_url, work_title, 
+      work_introduce, work_cover_url, is_deleted, 
+      create_time, update_time)
+    values (#{workId,jdbcType=BIGINT}, #{workType,jdbcType=TINYINT}, #{userId,jdbcType=BIGINT}, 
+      #{zanAmount,jdbcType=INTEGER}, #{workUrl,jdbcType=VARCHAR}, #{workTitle,jdbcType=VARCHAR}, 
+      #{workIntroduce,jdbcType=VARCHAR}, #{workCoverUrl,jdbcType=VARCHAR}, #{isDeleted,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="team.seven.endless.entity.ElWork">
+    insert into el_work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="workId != null">
+        work_id,
+      </if>
+      <if test="workType != null">
+        work_type,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="zanAmount != null">
+        zan_amount,
+      </if>
+      <if test="workUrl != null">
+        work_url,
+      </if>
+      <if test="workTitle != null">
+        work_title,
+      </if>
+      <if test="workIntroduce != null">
+        work_introduce,
+      </if>
+      <if test="workCoverUrl != null">
+        work_cover_url,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="workId != null">
+        #{workId,jdbcType=BIGINT},
+      </if>
+      <if test="workType != null">
+        #{workType,jdbcType=TINYINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="zanAmount != null">
+        #{zanAmount,jdbcType=INTEGER},
+      </if>
+      <if test="workUrl != null">
+        #{workUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="workTitle != null">
+        #{workTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="workIntroduce != null">
+        #{workIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="workCoverUrl != null">
+        #{workCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="team.seven.endless.entity.ElWorkExample" resultType="java.lang.Long">
+    select count(*) from el_work
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update el_work
+    <set>
+      <if test="record.workId != null">
+        work_id = #{record.workId,jdbcType=BIGINT},
+      </if>
+      <if test="record.workType != null">
+        work_type = #{record.workType,jdbcType=TINYINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.zanAmount != null">
+        zan_amount = #{record.zanAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.workUrl != null">
+        work_url = #{record.workUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workTitle != null">
+        work_title = #{record.workTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workIntroduce != null">
+        work_introduce = #{record.workIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workCoverUrl != null">
+        work_cover_url = #{record.workCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update el_work
+    set work_id = #{record.workId,jdbcType=BIGINT},
+      work_type = #{record.workType,jdbcType=TINYINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      zan_amount = #{record.zanAmount,jdbcType=INTEGER},
+      work_url = #{record.workUrl,jdbcType=VARCHAR},
+      work_title = #{record.workTitle,jdbcType=VARCHAR},
+      work_introduce = #{record.workIntroduce,jdbcType=VARCHAR},
+      work_cover_url = #{record.workCoverUrl,jdbcType=VARCHAR},
+      is_deleted = #{record.isDeleted,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="team.seven.endless.entity.ElWork">
+    update el_work
+    <set>
+      <if test="workType != null">
+        work_type = #{workType,jdbcType=TINYINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="zanAmount != null">
+        zan_amount = #{zanAmount,jdbcType=INTEGER},
+      </if>
+      <if test="workUrl != null">
+        work_url = #{workUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="workTitle != null">
+        work_title = #{workTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="workIntroduce != null">
+        work_introduce = #{workIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="workCoverUrl != null">
+        work_cover_url = #{workCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where work_id = #{workId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="team.seven.endless.entity.ElWork">
+    update el_work
+    set work_type = #{workType,jdbcType=TINYINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      zan_amount = #{zanAmount,jdbcType=INTEGER},
+      work_url = #{workUrl,jdbcType=VARCHAR},
+      work_title = #{workTitle,jdbcType=VARCHAR},
+      work_introduce = #{workIntroduce,jdbcType=VARCHAR},
+      work_cover_url = #{workCoverUrl,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where work_id = #{workId,jdbcType=BIGINT}
+  </update>
+</mapper>
