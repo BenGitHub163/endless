@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 /**
  * 修改用户名密码参数
@@ -13,7 +14,9 @@ import javax.validation.constraints.NotEmpty;
  */
 @Getter
 @Setter
-public class UpdateUserPasswordParam {
+public class UpdateElUserPasswordParam implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @NotEmpty
     private String account;
     @NotEmpty

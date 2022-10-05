@@ -1,9 +1,11 @@
 package team.seven.endless.dto;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 /**
  * 用户注册参数
@@ -13,9 +15,11 @@ import javax.validation.constraints.NotEmpty;
  */
 @Getter
 @Setter
-public class UserRegisterParam {
+@EqualsAndHashCode(callSuper = false)
+public class UserRegisterParam implements Serializable {
+    private static final long serialVersionUID = 1L;
     @NotEmpty
-    private String uid;
+    private String account;
     @NotEmpty
     private String password;
     private byte sex;

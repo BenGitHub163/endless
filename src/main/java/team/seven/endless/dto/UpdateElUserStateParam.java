@@ -1,0 +1,21 @@
+package team.seven.endless.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
+
+/**
+ * TODO
+ *
+ * @author ben
+ * @version 1.0
+ * @date 2022/10/5 14:43
+ */
+@Getter
+@Setter
+public class UpdateElUserStateParam implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String account;
+    private Byte userState;
+}

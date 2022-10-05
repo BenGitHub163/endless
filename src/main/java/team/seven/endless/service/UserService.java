@@ -1,6 +1,7 @@
 package team.seven.endless.service;
 
-import team.seven.endless.dto.UpdateUserPasswordParam;
+import org.springframework.web.multipart.MultipartFile;
+import team.seven.endless.dto.*;
 import team.seven.endless.entity.ElUser;
 
 import java.util.List;
@@ -31,7 +32,29 @@ public interface UserService {
      * @param param 参数
      * @return int
      */
-    int updatePassword(UpdateUserPasswordParam param);
+    int updatePassword(UpdateElUserPasswordParam param);
+
+    int updateNickname(UpdateUserNicknameParam param);
+
+    int updateEmail(UpdateElUserEmailParam param);
+
+    int updateUserRole(UpdateElUserRoleParam param);
+
+    int updateAvatar(String account, MultipartFile avatar);
+
+    int updateSex(UpdateElUserSexParam param);
+
+    int updateBirthday(UpdateElUserBirthdayParam param);
+
+    int updatePerSign(UpdateElUserPerSignParam param);
+
+    int updateExp(UpdateElUserExpParam param);
+
+    int updateTelPhone(UpdateElUserTelPhoneParam param);
+
+    int updateUserState(UpdateElUserStateParam param);
+
+    int updateRecentLoginTimeAndIp(UpdateElUserRecentLoginTimeAndIpParam param);
 
     int delete(String account);
 }

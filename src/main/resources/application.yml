@@ -4,27 +4,7 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: endless
-  datasource:
-    # 指定数据源类型
-    type: com.alibaba.druid.pool.DruidDataSource
-    # 配置数据库url
-    url: jdbc:mysql://localhost:3306/endless?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&nullCatalogMeansCurrent=true
-    username: root
-    password: 123456
-    # 配置数据库驱动 mysql8.0以上需要.cj
-    driver-class-name: com.mysql.cj.jdbc.Driver
-server:
-  #端口
-  port: 8081
-  servlet:
-    context-path: /
-mybatis:
-  #mapper的xml位置和别名
-  mapper-locations: classpath*:mapper/*.xml
-  type-aliases-package: team.seven.endless
-  #开启驼峰命名
-  configuration:
-    map-underscore-to-camel-case: true
-#    call-setters-on-nulls: true   #空值映射开启
+  profiles:
+    active: dev #prod
 
 
