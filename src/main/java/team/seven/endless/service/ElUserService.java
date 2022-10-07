@@ -3,7 +3,10 @@ package team.seven.endless.service;
 import org.springframework.web.multipart.MultipartFile;
 import team.seven.endless.dto.*;
 import team.seven.endless.entity.ElUser;
+import team.seven.endless.vo.ElUserLoginVo;
+import team.seven.endless.vo.ElUserRegisterVo;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -13,7 +16,7 @@ import java.util.List;
  * @version 1.0
  * @date 2022/10/2 15:21
  */
-public interface UserService {
+public interface ElUserService {
     List<ElUser> getAll();
 
     List<ElUser> getAllElUser();
@@ -58,7 +61,18 @@ public interface UserService {
 
     int delete(String account);
 
-//    int login(ElUserLoginParam Param);
-//
-//    int regester(MultipartFile avatar,ElUserRegisterParam param);
+    int login(ElUserLoginVo Param);
+
+    /**
+     * 注册
+     *
+     * @param param 参数
+     * @return int
+     */
+    int register(ElUserRegisterVo param);
+
+    Boolean sendRegisterCaptcha(String eMail);
+
+    String getLoginCaptcha(HttpServletResponse response);
+
 }

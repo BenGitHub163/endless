@@ -22,4 +22,10 @@ public class RedisTests {
     public void testSet(){
         redisService.set("abc",123);
     }
+
+    @Test
+    public void testGet(){
+        System.out.println(redisService.get("abcd") == null);
+//        System.out.println(redisService.get("abcd").toString());
+    }
 }

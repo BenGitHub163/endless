@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class ElUserLoginParam implements Serializable {
+public class ElUserLoginVo implements Serializable {
     private static final long serialVersionUID = 1L;
     @NotEmpty
     private String account;

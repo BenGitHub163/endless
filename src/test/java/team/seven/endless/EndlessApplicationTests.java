@@ -35,7 +35,7 @@ class EndlessApplicationTests {
         user.setAccount("zbh_manager");
         user.setPassword("123456");
         user.setNickname("小张");
-        Date birth = new Date();
+        Date birth;
         Calendar  calendar = Calendar.getInstance();
         calendar.set(2001,9-1,11);
         birth =  calendar.getTime();
@@ -111,7 +111,6 @@ class EndlessApplicationTests {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         elUserService.updateAvatar("zbh_manager",mulFile);
     }
 }
