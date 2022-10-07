@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        @page {
+            margin: 0px;
+        }
+        /*
+        宋体 SimSun
+        黑体 SimHei
+        微软雅黑 Microsoft YaHei
+        微软正黑体 Microsoft JhengHei
+        新宋体 NSimSun
+        新细明体 PMingLiU
+        细明体 MingLiU
+        标楷体 DFKai-SB
+        仿宋 FangSong
+        楷体 KaiTi
+        仿宋_GB2312 FangSong_GB2312
+        楷体_GB2312 KaiTi_GB2312
+        过渡型衬线 Times New Roman
+         */
+        body {
+            margin: 0px;
+            padding: 0px;
+            font: 100% SimSun, Microsoft YaHei, Times New Roman, Verdana, Arial, Helvetica, sans-serif;
+            color: #000;
+        }
+
+        .first_div {
+            height: auto;
+            width: 820px;
+            min-width: 820px;
+            margin: 0 auto;
+            margin-top: 20px;
+            border: 1px solid #eee;
+        }
+
+        .second_div {
+            padding: 10px 10px 0px 10px; /* 上右下左 */
+        }
+
+        .code_p {
+            text-align: center;
+            font-family: "Times New Roman";
+            font-size: 22px;
+            color: #C60024;
+            padding: 20px 0px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            background: #ebebeb;
+        }
+
+        .copyright_div {
+            text-align: center;
+            font-size: 12px;
+            padding: 20px 0px;
+            font-family: "Microsoft YaHei UI";
+        }
+    </style>
+</head>
+<body>
+    <div class="first_div">
+        <div class="second_div">
+            <p style="margin-bottom: 10px; padding-bottom: 0px;">尊敬的用户，您好：</p>
+            <p style="text-indent: 2em; margin-bottom: 10px;">您正在申请[无涯]的邮箱验证，您的验证码是(5分钟内有效)：</p>
+            <p class="code_p">${code}</p>
+            <div class="foot-hr hr" style="margin: 30px auto 0px;
+                z-index: 111;
+                width: 800px;
+                border-top: 1px solid #DA251D;">
+            </div>
+            <div class="copyright_div">
+                Copyright &copy; <a style="color: #999;" href="https://tqazy.com" target="_blank">无涯</a> 版权所有。
+            </div>
+        </div>
+    </div>
+</body>

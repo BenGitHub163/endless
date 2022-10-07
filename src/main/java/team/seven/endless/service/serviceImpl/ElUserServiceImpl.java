@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 import team.seven.endless.dto.*;
 import team.seven.endless.entity.ElUser;
@@ -16,17 +15,13 @@ import team.seven.endless.mapper.ElUserMapper;
 import team.seven.endless.service.UserService;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
 import cn.hutool.core.util.StrUtil;
-import team.seven.endless.util.upload;
+import team.seven.endless.util.FileUtil;
 
 /**
  * TODO
@@ -114,7 +109,7 @@ public class ElUserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateNickname(UpdateUserNicknameParam param){
+    public int updateNickname(UpdateElUserNicknameParam param){
         ElUser elUser = new ElUser();
         elUser.setAccount(param.getAccount());
         elUser.setNickname(param.getNewNickname());
@@ -140,7 +135,7 @@ public class ElUserServiceImpl implements UserService {
     public int updateAvatar(String account, MultipartFile avatar){
         String avatarPath = "";
         try {
-            avatarPath = upload.uploadFile(avatar,"avatar");
+            avatarPath = FileUtil.uploadFile(avatar,"avatar");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -213,4 +208,15 @@ public class ElUserServiceImpl implements UserService {
         elUser.setIsDeleted(true);
         return elUserMapper.updateByExampleSelective(elUser,example);
     }
+
+//    @Override
+//    public int login(ElUserLoginParam Param){
+//
+//    }
+//
+//    @Override
+//    public int regester(MultipartFile avatar, ElUserRegisterParam param){
+//
+//    }
+
 }

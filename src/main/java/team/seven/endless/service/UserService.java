@@ -34,7 +34,7 @@ public interface UserService {
      */
     int updatePassword(UpdateElUserPasswordParam param);
 
-    int updateNickname(UpdateUserNicknameParam param);
+    int updateNickname(UpdateElUserNicknameParam param);
 
     int updateEmail(UpdateElUserEmailParam param);
 
@@ -57,4 +57,8 @@ public interface UserService {
     int updateRecentLoginTimeAndIp(UpdateElUserRecentLoginTimeAndIpParam param);
 
     int delete(String account);
+
+//    int login(ElUserLoginParam Param);
+//
+//    int regester(MultipartFile avatar,ElUserRegisterParam param);
 }

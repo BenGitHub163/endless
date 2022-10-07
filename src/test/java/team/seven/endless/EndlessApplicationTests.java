@@ -1,17 +1,17 @@
 package team.seven.endless;
 
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.http.ContentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import team.seven.endless.dto.UpdateElUserExpParam;
 import team.seven.endless.dto.UpdateElUserTelPhoneParam;
 import team.seven.endless.entity.ElUser;
 import team.seven.endless.service.serviceImpl.ElUserServiceImpl;
-import team.seven.endless.util.upload;
+import team.seven.endless.util.FileUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,7 +30,7 @@ class EndlessApplicationTests {
     }
 
     @Test
-    void addElUser(){
+    void testAddElUser(){
         ElUser user = new ElUser();
         user.setAccount("zbh_manager");
         user.setPassword("123456");
@@ -46,7 +46,7 @@ class EndlessApplicationTests {
         System.out.println(b.toString());
     }
     @Test
-    void updateExpTest(){
+    void testUpdateExp(){
         UpdateElUserExpParam u = new UpdateElUserExpParam();
         u.setAccount("zbh_manager");
         u.setNumber(123);
@@ -54,13 +54,13 @@ class EndlessApplicationTests {
     }
 
     @Test
-    void getElUserByAccount(){
+    void testgetElUserByAccount(){
         List<ElUser> elUSers = elUserService.getByAccount("zbh_manager");
         System.out.println(elUSers.get(0).toString());
     }
 
     @Test
-    void updateTelPhone(){
+    void testupdateTelPhone(){
         UpdateElUserTelPhoneParam u =  new UpdateElUserTelPhoneParam();
         u.setNewTelPhone("123456");
         u.setAccount("zbh_manager");
@@ -68,14 +68,14 @@ class EndlessApplicationTests {
     }
 
     @Test
-    void uploadTest(){
-        File file = new File("C:\\Users\\ben\\Desktop\\Snipaste_2022-08-29_12-48-40.png");
+    void testupload(){
+        File file = new File("C:\\Users\\ben\\Desktop\\38756ac7480c901fc144f5c2931c0e6a.mp4");
 
         MultipartFile mulFile = null;
         try {
             mulFile = new MockMultipartFile(
-                    "haha.jpg", //文件名
-                    "haha.jpg", //originalName 相当于上传文件在客户机上的文件名
+                    "38756ac7480c901fc144f5c2931c0e6a.mp4", //文件名
+                    "38756ac7480c901fc144f5c2931c0e6a.mp4", //originalName 相当于上传文件在客户机上的文件名
                     ContentType.MULTIPART.toString(), //文件类型
                     new FileInputStream(file) //文件流
             );
@@ -84,10 +84,34 @@ class EndlessApplicationTests {
         }
 
         try {
-            upload.uploadFile(mulFile,"avatar");
+            FileUtil.uploadFile(mulFile,"avatar");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @Test
+    public void testUUID(){
+        System.out.println("IdUtil   "+IdUtil.simpleUUID());
+    }
+
+    @Test
+    public void testUpdateAvatar(){
+        String fileName = "Snipaste_2022-08-29_12-48-40.png";
+        File file = new File("C:\\Users\\ben\\Desktop\\"+fileName);
+
+        MultipartFile mulFile = null;
+        try {
+            mulFile = new MockMultipartFile(
+                    fileName, //文件名
+                    fileName, //originalName 相当于上传文件在客户机上的文件名
+                    ContentType.MULTIPART.toString(), //文件类型
+                    new FileInputStream(file) //文件流
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        elUserService.updateAvatar("zbh_manager",mulFile);
+    }
 }

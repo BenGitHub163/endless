@@ -1,5 +1,6 @@
-package team.seven.endless.dto;
+package team.seven.endless.vo;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,19 +8,18 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 /**
- * TODO
+ * 用户登录参数
  *
  * @author ben
- * @version 1.0
- * @date 2022/10/5 10:21
+ * @date 2022/07/30
  */
 @Getter
 @Setter
-public class UpdateUserNicknameParam implements Serializable {
+@EqualsAndHashCode(callSuper = false)
+public class ElUserLoginParam implements Serializable {
     private static final long serialVersionUID = 1L;
     @NotEmpty
     private String account;
     @NotEmpty
-    private String newNickname;
-
+    private String password;
 }

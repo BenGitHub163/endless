@@ -1,5 +1,6 @@
 package team.seven.endless.util;
 
+import cn.hutool.core.util.IdUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ResourceUtils;
@@ -14,8 +15,8 @@ import java.io.File;
  * @version 1.0
  * @date 2022/10/5 16:27
  */
-public class upload {
-    private static final Logger LOGGER= LoggerFactory.getLogger(upload.class);
+public class FileUtil {
+    private static final Logger LOGGER= LoggerFactory.getLogger(FileUtil.class);
 
 
     /**
@@ -48,7 +49,7 @@ public class upload {
             fileRealPath.mkdirs();
         }
         //获取文件名称
-        String fileName = file.getOriginalFilename();
+        String fileName = IdUtil.simpleUUID() + file.getOriginalFilename();
         //创建文件存放地址
         File resultPath = new File(fileRealPath+"/"+fileName);
         if (resultPath.exists()){
