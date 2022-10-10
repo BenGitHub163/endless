@@ -76,4 +76,7 @@ public interface ElUserService {
     String getLoginCaptcha(HttpServletResponse response);
 
     String forgetAccountPassword(String account);
+
+    Boolean haveAccount(String account);
+
 }

@@ -121,7 +121,7 @@ public class ElUserServiceImpl implements ElUserService {
     @Override
     public int updatePassword(UpdateElUserPasswordParam param){
         if (StrUtil.isEmpty(param.getAccount())
-                || StrUtil.isEmpty(param.getOldPassword())
+//                || StrUtil.isEmpty(param.getOldPassword())
                 || StrUtil.isEmpty(param.getNewPassword())) {
             //属性为空
             return -1;
@@ -135,10 +135,10 @@ public class ElUserServiceImpl implements ElUserService {
         }
 
         ElUser elUser = userList.get(0);
-        if(!passwordEncoder.matches(param.getOldPassword(),elUser.getPassword())) {
-            //旧密码错误
-            return -3;
-        }
+//        if(!passwordEncoder.matches(param.getOldPassword(),elUser.getPassword())) {
+//            //旧密码错误
+//            return -3;
+//        }
         elUser.setPassword(passwordEncoder.encode(param.getNewPassword()));
         elUserMapper.updateByPrimaryKey(elUser);
         return 1;
@@ -343,5 +343,22 @@ public class ElUserServiceImpl implements ElUserService {
             return elUser.geteMail();
         }
         return "";
+    }
+
+    /**
+     * 是否存在该账号
+     *
+     * @param account 账号
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean haveAccount(String account){
+        ElUserExample example = new ElUserExample();
+        example.createCriteria().andAccountEqualTo(account);
+        List<ElUser> elUsers = elUserMapper.selectByExample(example);
+        if(CollUtil.isEmpty(elUsers)){
+            return false;
+        }
+        return true;
     }
 }

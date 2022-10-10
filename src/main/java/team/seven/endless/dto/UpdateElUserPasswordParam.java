@@ -19,8 +19,8 @@ public class UpdateElUserPasswordParam implements Serializable {
 
     @NotEmpty
     private String account;
-    @NotEmpty
-    private String oldPassword;
+//    @NotEmpty
+//    private String oldPassword;
     @NotEmpty
     private String newPassword;
 }
