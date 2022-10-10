@@ -14,14 +14,12 @@ import team.seven.endless.vo.ElUserLoginVo;
 import team.seven.endless.vo.ElUserRegisterVo;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.stream.events.Comment;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * TODO
- *
+ *  用户
  * @author ben
  * @version 1.0
  * @date 2022/10/2 16:05
@@ -32,6 +30,11 @@ public class ElUserController {
     @Autowired
     ElUserService elUserService;
 
+    /**
+     * 得到所有用户信息
+     *
+     * @return {@link CommonResult}
+     */
     @GetMapping("get_all_el_user")
    public CommonResult getAllElUser(){
        List<ElUser> elUserList =elUserService.getAllElUser();
@@ -40,7 +43,7 @@ public class ElUserController {
 
 
     /**
-     * 登录页面
+     * 登录页面 该API响应体中带有验证码图片
      *
      * @param response
      * @return {@link CommonResult}
@@ -75,6 +78,12 @@ public class ElUserController {
         return CommonResult.failed(msg);
     }
 
+    /**
+     * 注册
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/register")
     public CommonResult register(ElUserRegisterVo param){
         int result = elUserService.register(param);
@@ -84,6 +93,12 @@ public class ElUserController {
         return CommonResult.failed("注册失败");
     }
 
+    /**
+     * 更新密码
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/password")
     public CommonResult updatePassword(UpdateElUserPasswordParam param){
         if(elUserService.updatePassword(param)>0){
@@ -92,6 +107,12 @@ public class ElUserController {
         return CommonResult.failed("修改失败");
     }
 
+    /**
+     * 更新昵称
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/nickname")
     public CommonResult updateNickname(UpdateElUserNicknameParam param){
         if(elUserService.updateNickname(param)>0){
@@ -99,6 +120,13 @@ public class ElUserController {
         }
         return CommonResult.failed("修改失败");
     }
+
+    /**
+     * 更新电子邮件
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/email")
     public CommonResult updateEmail(UpdateElUserEmailParam param){
         if(elUserService.updateEmail(param)>0){
@@ -106,6 +134,13 @@ public class ElUserController {
         }
         return CommonResult.failed("修改失败");
     }
+
+    /**
+     * 更新用户角色
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/user_role")
     public CommonResult updateUserRole(UpdateElUserRoleParam param){
         if(elUserService.updateUserRole(param)>0){
@@ -113,6 +148,14 @@ public class ElUserController {
         }
         return CommonResult.failed("修改失败");
     }
+
+    /**
+     * 更新头像
+     *
+     * @param account 账户
+     * @param avatar  《阿凡达》
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/avatar")
     public CommonResult updateAvatar(String account, MultipartFile avatar){
         if(elUserService.updateAvatar(account,avatar)>0){
@@ -121,6 +164,12 @@ public class ElUserController {
         return CommonResult.failed("修改失败");
     }
 
+    /**
+     * 更新性别
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/sex")
     public CommonResult updateSex(UpdateElUserSexParam param){
         if(elUserService.updateSex(param)>0){
@@ -129,6 +178,12 @@ public class ElUserController {
         return CommonResult.failed("修改失败");
     }
 
+    /**
+     * 更新生日
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/birthday")
     public CommonResult updateBirthday(UpdateElUserBirthdayParam param){
         if(elUserService.updateBirthday(param)>0){
@@ -136,6 +191,13 @@ public class ElUserController {
         }
         return CommonResult.failed("修改失败");
     }
+
+    /**
+     * 更新个性签名
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/persign")
     public CommonResult updatePerSign(UpdateElUserPerSignParam param){
         if(elUserService.updatePerSign(param)>0){
@@ -143,6 +205,13 @@ public class ElUserController {
         }
         return CommonResult.failed("修改失败");
     }
+
+    /**
+     * 更新经验
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/exp")
     public CommonResult updateExp(UpdateElUserExpParam param){
         if(elUserService.updateExp(param)>0){
@@ -150,6 +219,13 @@ public class ElUserController {
         }
         return CommonResult.failed("修改失败");
     }
+
+    /**
+     * 更新电话号码
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/telphone")
     public CommonResult updateTelPhone(UpdateElUserTelPhoneParam param){
         if(elUserService.updateTelPhone(param)>0){
@@ -158,6 +234,12 @@ public class ElUserController {
         return CommonResult.failed("修改失败");
     }
 
+    /**
+     * 更新用户状态
+     *
+     * @param param 参数
+     * @return {@link CommonResult}
+     */
     @PostMapping("/update/user_state")
     public CommonResult updateUserState(UpdateElUserStateParam param){
         if(elUserService.updateUserState(param)>0){

@@ -141,6 +141,9 @@
                     <include>**/*.yml</include>
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
+                    <include>**/*.css</include>
+                    <include>**/*.html</include>
+                    <include>**/*.js</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
@@ -210,6 +213,18 @@
                     <verbose>true</verbose>
                 </configuration>
 
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.shalousun</groupId>
+                <artifactId>smart-doc-maven-plugin</artifactId>
+                <version>2.2.8</version>
+                <configuration>
+                    <!--指定smart-doc使用的配置文件路径-->
+                    <configFile>./src/main/resources/smart-doc.json</configFile>
+                    <!--指定项目名称-->
+                    <projectName>endless-smart-doc</projectName>
+                </configuration>
             </plugin>
         </plugins>
     </build>

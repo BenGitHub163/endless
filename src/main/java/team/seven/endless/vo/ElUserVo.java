@@ -22,18 +22,39 @@ import java.util.Date;
 public class ElUserVo  implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 账号
+     */
     private String account;
 
+    /**
+     * 昵称
+     */
     private String nickname;
 
+    /**
+     * 电子邮件
+     */
     private String eMail;
 
+    /**
+     * 用户角色
+     */
     private Byte userRole;
 
+    /**
+     * 头像url
+     */
     private String avatarUrl;
 
+    /**
+     * 性别
+     */
     private Byte sex;
 
+    /**
+     * 生日
+     */
     private Date birthday;
 
     private String perSign;

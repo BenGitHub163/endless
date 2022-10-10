@@ -21,19 +21,40 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 public class ElUserRegisterVo implements Serializable {
     private static final long serialVersionUID = 1L;
+    /**
+     * 账号
+     */
     @NotEmpty
     private String account;
+    /**
+     * 密码
+     */
     @NotEmpty
     private String password;
+    /**
+     * 昵称
+     */
     @NotEmpty
     private String nickname;
+    /**
+     * 电子邮件
+     */
     @NotEmpty
     @Email
     private String eMail;
+    /**
+     * 性别
+     */
     @NotEmpty
     private byte sex;
+    /**
+     * 生日
+     */
     @DateTimeFormat
     private Date birthday;
+    /**
+     * 验证码
+     */
     @NotEmpty
     private String captcha;
 }

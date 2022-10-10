@@ -18,8 +18,14 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 public class ElUserLoginVo implements Serializable {
     private static final long serialVersionUID = 1L;
+    /**
+     * 账号
+     */
     @NotEmpty
     private String account;
+    /**
+     * 密码
+     */
     @NotEmpty
     private String password;
 }
