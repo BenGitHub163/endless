@@ -21,18 +21,22 @@ public interface EmailService {
     void send(EmailVo emailVo, EmailConfig emailConfig);
 
     /**
+     * 获取验证码邮件签证官
      * 获取验证码的邮件参数类
+     *
      * @param toEmail 目标邮箱
-     * @return
+     * @return {@link EmailVo}
      */
     EmailVo getVerificationCodeEmailVo(String toEmail);
 
     /**
+     * 简单通知邮件签证官
      * 获取简单通知的邮件参数类
+     *
      * @param toEmail 目标邮箱
-     * @return
+     * @param msg     味精
+     * @return {@link EmailVo}
      */
     EmailVo getSimpleNotificationEmailVo(String toEmail, String msg);
-
 
 }

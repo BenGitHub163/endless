@@ -5,12 +5,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import team.seven.endless.api.CommonResult;
+import team.seven.endless.dto.*;
 import team.seven.endless.entity.ElUser;
 import team.seven.endless.service.ElUserService;
 import team.seven.endless.vo.ElUserLoginVo;
+import team.seven.endless.vo.ElUserRegisterVo;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.stream.events.Comment;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +73,97 @@ public class ElUserController {
         }
         msg="账号或密码错误";
         return CommonResult.failed(msg);
+    }
+
+    @PostMapping("/register")
+    public CommonResult register(ElUserRegisterVo param){
+        int result = elUserService.register(param);
+        if(result > 0){
+            return CommonResult.success(null,"注册成功");
+        }
+        return CommonResult.failed("注册失败");
+    }
+
+    @PostMapping("/update/password")
+    public CommonResult updatePassword(UpdateElUserPasswordParam param){
+        if(elUserService.updatePassword(param)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+
+    @PostMapping("/update/nickname")
+    public CommonResult updateNickname(UpdateElUserNicknameParam param){
+        if(elUserService.updateNickname(param)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+    @PostMapping("/update/email")
+    public CommonResult updateEmail(UpdateElUserEmailParam param){
+        if(elUserService.updateEmail(param)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+    @PostMapping("/update/user_role")
+    public CommonResult updateUserRole(UpdateElUserRoleParam param){
+        if(elUserService.updateUserRole(param)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+    @PostMapping("/update/avatar")
+    public CommonResult updateAvatar(String account, MultipartFile avatar){
+        if(elUserService.updateAvatar(account,avatar)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+
+    @PostMapping("/update/sex")
+    public CommonResult updateSex(UpdateElUserSexParam param){
+        if(elUserService.updateSex(param)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+
+    @PostMapping("/update/birthday")
+    public CommonResult updateBirthday(UpdateElUserBirthdayParam param){
+        if(elUserService.updateBirthday(param)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+    @PostMapping("/update/persign")
+    public CommonResult updatePerSign(UpdateElUserPerSignParam param){
+        if(elUserService.updatePerSign(param)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+    @PostMapping("/update/exp")
+    public CommonResult updateExp(UpdateElUserExpParam param){
+        if(elUserService.updateExp(param)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+    @PostMapping("/update/telphone")
+    public CommonResult updateTelPhone(UpdateElUserTelPhoneParam param){
+        if(elUserService.updateTelPhone(param)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
+    }
+
+    @PostMapping("/update/user_state")
+    public CommonResult updateUserState(UpdateElUserStateParam param){
+        if(elUserService.updateUserState(param)>0){
+            return CommonResult.success(null,"修改成功");
+        }
+        return CommonResult.failed("修改失败");
     }
 
 

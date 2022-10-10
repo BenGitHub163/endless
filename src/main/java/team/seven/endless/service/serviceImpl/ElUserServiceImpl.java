@@ -29,6 +29,7 @@ import team.seven.endless.service.RedisService;
 import team.seven.endless.util.FileUtil;
 import team.seven.endless.vo.ElUserLoginVo;
 import team.seven.endless.vo.ElUserRegisterVo;
+import team.seven.endless.vo.ElUserVo;
 import team.seven.endless.vo.EmailVo;
 
 import javax.servlet.http.HttpServletResponse;
@@ -93,6 +94,22 @@ public class ElUserServiceImpl implements ElUserService {
     @Override
     public int update(ElUser elUser) {
        return  elUserMapper.updateByPrimaryKeySelective(elUser);
+    }
+
+    public int updateElUserCommonData(ElUserVo vo){
+        ElUserExample example = new ElUserExample();
+        example.createCriteria().andAccountEqualTo(vo.getAccount());
+        List<ElUser> elUsers = elUserMapper.selectByExample(example);
+        if(CollUtil.isEmpty(elUsers)){
+            return -1;
+        }
+        ElUser elUser = elUsers.get(0);
+        System.out.println("before:   "+elUser);
+
+        BeanUtils.copyProperties(vo,elUser);
+
+        System.out.println("after:   "+elUser);
+        return elUserMapper.updateByPrimaryKey(elUser);
     }
 
     public int updateByAccount(ElUser elUser){
@@ -310,5 +327,21 @@ public class ElUserServiceImpl implements ElUserService {
             e.printStackTrace();
         }
         return uuid;
+    }
+
+    @Override
+    public String forgetAccountPassword(String account){
+        ElUser elUser;
+        ElUserExample example = new ElUserExample();
+        example.createCriteria().andAccountEqualTo(account);
+        List<ElUser> elUsers = elUserMapper.selectByExample(example);
+        //用户存在
+        if(!CollUtil.isEmpty(elUsers)){
+            elUser = elUsers.get(0);
+            EmailVo emailVo = emailService.getVerificationCodeEmailVo(elUser.geteMail());
+            emailService.send(emailVo,null);
+            return elUser.geteMail();
+        }
+        return "";
     }
 }
