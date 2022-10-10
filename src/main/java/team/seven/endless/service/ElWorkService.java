@@ -1,6 +1,7 @@
 package team.seven.endless.service;
 
 import team.seven.endless.entity.ElWork;
+import team.seven.endless.vo.ElWorkVo;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @date 2022/10/8 14:30
  */
 public interface ElWorkService {
+
     /**
      * 得到所有作品
      *
@@ -44,13 +46,21 @@ public interface ElWorkService {
 
     int updateZanAmount(Long workId,int amount);
 
-    int updateWorkUrl();
+//    int updateWorkUrl();
+//
+//    int updateWorkTitle();
+//
+//    int updateWorkIntroduce();
+//
+//    int updateWorkCoverUrl();
 
-    int updateWorkTitle();
-
-    int updateWorkIntroduce();
-
-    int updateWorkCoverUrl();
+    /**
+     * 更新作品普通数据
+     *
+     * @param vo 签证官
+     * @return int
+     */
+    int updateElWorkCommonData(ElWorkVo vo);
 
     /**
      * 删除
