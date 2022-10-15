@@ -65,6 +65,12 @@ spring:
       max-file-size: 100MB
       #最大请求大小可以是mb也可以是kb
       max-request-size: 100MB
+#分页pageHelper
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
 server:
   #端口
   port: 8081

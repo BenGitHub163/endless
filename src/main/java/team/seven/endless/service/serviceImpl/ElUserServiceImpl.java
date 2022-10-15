@@ -4,6 +4,9 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -58,12 +61,22 @@ public class ElUserServiceImpl implements ElUserService {
     @Autowired
     private RedisService redisService;
 
+    /**
+     * 得到所有用户数据
+     *
+     * @return {@link List}<{@link ElUser}>
+     */
     @Override
     public List<ElUser> getAll() {
         ElUserExample elUserExample = new ElUserExample();
         return elUserMapper.selectByExample(elUserExample);
     }
 
+    /**
+     * 得到所有未删除用户数据
+     *
+     * @return {@link List}<{@link ElUser}>
+     */
     @Override
     public List<ElUser> getAllElUser() {
         ElUserExample elUserExample = new ElUserExample();
@@ -77,7 +90,13 @@ public class ElUserServiceImpl implements ElUserService {
         return elUserMapper.selectByPrimaryKey(id);
     }
 
-   @Override
+    /**
+     * 根据账户获取用户数据
+     *
+     * @param account 账户
+     * @return {@link List}<{@link ElUser}>
+     */
+    @Override
    public List<ElUser> getByAccount(String account){
        ElUserExample elUserExample = new ElUserExample();
        ElUserExample.Criteria criteria = elUserExample.createCriteria();
@@ -85,17 +104,43 @@ public class ElUserServiceImpl implements ElUserService {
        return elUserMapper.selectByExample(elUserExample);
    }
 
+   public PageInfo<ElUser> getElUserPage(int pageNum,int pageSize){
+       PageHelper.startPage(pageNum,pageSize);
+       List<ElUser> allElUser = getAllElUser();
+       PageInfo<ElUser> pageInfo = new PageInfo<>(allElUser);
+       return pageInfo;
+   }
+
+    /**
+     * 添加用户
+     *
+     * @param elUser el用户
+     * @return int
+     */
     @Override
     public int add(ElUser elUser) {
        return elUserMapper.insertSelective(elUser);
     }
 
 
+    /**
+     * 添加用户
+     *
+     * @param elUser el用户
+     * @return int
+     */
     @Override
     public int update(ElUser elUser) {
        return  elUserMapper.updateByPrimaryKeySelective(elUser);
     }
 
+    /**
+     * 更新用户普通数据
+     *
+     * @param vo 签证官
+     * @return int
+     */
+    @Override
     public int updateElUserCommonData(ElUserVo vo){
         ElUserExample example = new ElUserExample();
         example.createCriteria().andAccountEqualTo(vo.getAccount());
@@ -112,16 +157,27 @@ public class ElUserServiceImpl implements ElUserService {
         return elUserMapper.updateByPrimaryKey(elUser);
     }
 
+    /**
+     * 根据账号更新用户信息
+     *
+     * @param elUser el用户
+     * @return int
+     */
     public int updateByAccount(ElUser elUser){
         ElUserExample elUserExample = new ElUserExample();
         elUserExample.createCriteria().andAccountEqualTo(elUser.getAccount());
         return elUserMapper.updateByExampleSelective(elUser,elUserExample);
     }
 
+    /**
+     * 更新密码
+     *
+     * @param param 参数
+     * @return int
+     */
     @Override
     public int updatePassword(UpdateElUserPasswordParam param){
         if (StrUtil.isEmpty(param.getAccount())
-//                || StrUtil.isEmpty(param.getOldPassword())
                 || StrUtil.isEmpty(param.getNewPassword())) {
             //属性为空
             return -1;
@@ -135,10 +191,6 @@ public class ElUserServiceImpl implements ElUserService {
         }
 
         ElUser elUser = userList.get(0);
-//        if(!passwordEncoder.matches(param.getOldPassword(),elUser.getPassword())) {
-//            //旧密码错误
-//            return -3;
-//        }
         elUser.setPassword(passwordEncoder.encode(param.getNewPassword()));
         elUserMapper.updateByPrimaryKey(elUser);
         return 1;
@@ -329,8 +381,14 @@ public class ElUserServiceImpl implements ElUserService {
         return uuid;
     }
 
+    /**
+     * 忘记帐户密码
+     *
+     * @param account 账户
+     * @return {@link String}
+     */
     @Override
-    public String forgetAccountPassword(String account){
+    public String forgetPassword(String account){
         ElUser elUser;
         ElUserExample example = new ElUserExample();
         example.createCriteria().andAccountEqualTo(account);

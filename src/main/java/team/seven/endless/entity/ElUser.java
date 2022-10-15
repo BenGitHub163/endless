@@ -3,6 +3,12 @@ package team.seven.endless.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * el用户
+ *
+ * @author ben
+ * @date 2022/10/15
+ */
 public class ElUser implements Serializable {
     private Long userId;
 

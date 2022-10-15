@@ -5,6 +5,7 @@ import team.seven.endless.dto.*;
 import team.seven.endless.entity.ElUser;
 import team.seven.endless.vo.ElUserLoginVo;
 import team.seven.endless.vo.ElUserRegisterVo;
+import team.seven.endless.vo.ElUserVo;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -28,6 +29,8 @@ public interface ElUserService {
     int add(ElUser elUser);
 
     int update(ElUser elUser);
+
+    int updateElUserCommonData(ElUserVo vo);
 
     /**
      * 更新密码
@@ -75,7 +78,7 @@ public interface ElUserService {
 
     String getLoginCaptcha(HttpServletResponse response);
 
-    String forgetAccountPassword(String account);
+    String forgetPassword(String account);
 
     Boolean haveAccount(String account);
 

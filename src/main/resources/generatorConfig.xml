@@ -63,15 +63,9 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
         <!-- 指定生成哪些数据库表，要和数据库中对应，不能写错了，这里以t_user表为例，可以写多个；domainObjectName是要生成的实体类名称-->
-        <table schema="mybatis" tableName="el_user"/>
-        <table schema="mybatis" tableName="el_collect"/>
-        <table schema="mybatis" tableName="el_comment"/>
-        <table schema="mybatis" tableName="el_follow"/>
-        <table schema="mybatis" tableName="el_work"/>
-        <table schema="mybatis" tableName="el_work_have_tag"/>
-        <table schema="mybatis" tableName="el_work_tag"/>
-        <table schema="mybatis" tableName="el_zan"/>
-        <table schema="mybatis" tableName="el_browse"/>
+<!--
+-->
+        <table schema="mybatis" tableName="el_user_visit_web"/>
         <!-- 有些表的字段需要指定java类型
          <table schema="" tableName="">
             <columnOverride column="" javaType="" />

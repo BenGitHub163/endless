@@ -79,6 +79,13 @@ public class ElWorkServiceImpl implements ElWorkService {
         return -1;
     }
 
+    /**
+     * 更新zan数量
+     *
+     * @param workId 工作id
+     * @param amount 量
+     * @return int
+     */
     @Override
     public int updateZanAmount(Long workId, int amount){
         ElWorkExample example = new ElWorkExample();

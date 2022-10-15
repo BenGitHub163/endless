@@ -95,5 +95,11 @@ public class ElUserTest {
 //        elUSerVo.setTelPhone("");
 //        elUSerVo.set
     }
+
+    @Test
+    public void testGetpage(){
+        System.out.println(elUserService.getElUserPage(2,2).toString());
+        System.out.println(elUserService.getAllElUser());
+    }
 }
 

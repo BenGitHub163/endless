@@ -32,7 +32,7 @@ CREATE TABLE `el_user`
     `password` VARCHAR(200) NOT NULL COMMENT '密码',
     `nickname` VARCHAR(50) NOT NULL DEFAULT '默认用户名' COMMENT '昵称',
     `e_mail` VARCHAR(20) NOT NULL DEFAULT ''  COMMENT '电子邮箱',
-    `user_role` TINYINT NOT NULL DEFAULT 1 COMMENT '用户角色 1为用户 2为管理员 3 为超级管理员',
+    `user_role` TINYINT NOT NULL DEFAULT 1 COMMENT '用户角色 1为用户 2为管理员 3 为超级管理员 4 为游客',
     `avatar_url` VARCHAR(150) NOT NULL DEFAULT '' COMMENT '头像路径',
     `sex` TINYINT NOT NULL DEFAULT 1 COMMENT '性别 1/0/-1, 1为男 0为女 -1 为保密',
     `birthday` DATE NOT NULL DEFAULT '1000-01-01' COMMENT '出生日期 当日期为 ’1000-01-01‘时 为用户未设置出生日期 ',
@@ -152,4 +152,17 @@ CREATE TABLE `el_follow`
     `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (follow_id)
 )ENGINE = INNODB COMMENT ='无涯关注表';
+
+DROP TABLE IF EXISTS `el_user_visit_web`;
+CREATE TABLE `el_user_visit_web`
+(
+    `user_visit_web_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '用户访问网站表id',
+    `sum` int NOT NULL DEFAULT 0 COMMENT '总数',
+    `visit_time` DATE NOT NULL COMMENT '访问时间',
+    `is_deleted` BIT NOT NULL DEFAULT 0 COMMENT '是否删除 0为未删除 1 为删除',
+    `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+    PRIMARY KEY (user_visit_web_id)
+)ENGINE = INNODB COMMENT = '用户访问网站表';
+
 

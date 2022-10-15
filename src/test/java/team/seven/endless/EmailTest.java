@@ -27,13 +27,14 @@ public class EmailTest {
 //        tos.add("841540110@qq.com");
 //        tos.add("20767723218@qq.com");
 //        tos.add("1796228812@qq.com");
-        tos.add("2365969940@qq.com");
-        EmailVo e = new EmailVo(tos,"testSendEmail","呦，这不是小菲菲嘛！");
+        tos.add("1796228812@qq.com");
+
         for (int i = 0; i < 100; i++) {
+            EmailVo e = new EmailVo(tos,"testSendEmail","老姐，你在干嘛啊！"+i);
             emailService.send(e,null);
             System.out.println(i);
         }
-        emailService.send(e,null);
+//        emailService.send(e,null);
 //        emailService.send(e,null);
 //        emailService.send(e,null);
 //        emailService.send(e,null);
